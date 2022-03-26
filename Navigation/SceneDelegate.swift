@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let profileNavigationVC = UINavigationController(rootViewController: profileVC)
         let feedNavigationVC = UINavigationController(rootViewController: feedVC)
         
-        profileNavigationVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crrrop.circle"), tag: 0)
+        profileNavigationVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 0)
         feedNavigationVC.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "note.text"), tag: 1)
         
         let tabBar = UITabBarController()
