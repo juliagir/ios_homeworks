@@ -8,29 +8,36 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-    
-    let header = ProfileHeaderView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
-        self.view.addSubview(header)
-        title = "Profile"
-    }
-    
-    override func viewWillLayoutSubviews() {
         
-        header.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            header.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            header.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-            header.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            header.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-        ])
+        title = "Profile"
+        view.backgroundColor = .lightGray
+        
+        let header = ProfileHeaderView()
+        view.addSubview(header)
+        
+        header.setupView()
+        
+        let titleButton = UIButton()
+        titleButton.translatesAutoresizingMaskIntoConstraints = false
+        titleButton.backgroundColor = .systemMint
+        titleButton.setTitle("New title", for: .normal)
+        titleButton.setTitleColor(.white, for: .highlighted)
+        titleButton.addTarget(self, action: #selector(newTitle), for: .touchUpInside)
+        
+        view.addSubview(titleButton)
+        
+        titleButton.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        titleButton.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        titleButton.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        titleButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+      
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+    @objc func newTitle() {
+        self.title = "New title"
     }
     
 }
