@@ -10,9 +10,14 @@
 		BFFADBA827EF8EE20093237D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFADBA727EF8EE20093237D /* AppDelegate.swift */; };
 		BFFADBAA27EF8EE20093237D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFADBA927EF8EE20093237D /* SceneDelegate.swift */; };
 		BFFADBAC27EF8EE20093237D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFADBAB27EF8EE20093237D /* ViewController.swift */; };
-		BFFADBAF27EF8EE20093237D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFFADBAD27EF8EE20093237D /* Main.storyboard */; };
 		BFFADBB127EF8EE40093237D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFFADBB027EF8EE40093237D /* Assets.xcassets */; };
 		BFFADBB427EF8EE40093237D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFFADBB227EF8EE40093237D /* LaunchScreen.storyboard */; };
+		BFFADBBC27EF9B780093237D /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFADBBB27EF9B780093237D /* FeedViewController.swift */; };
+		BFFADBBE27EF9B860093237D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFADBBD27EF9B860093237D /* ProfileViewController.swift */; };
+		BFFADBC027EF9C2B0093237D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFADBBF27EF9C2B0093237D /* Post.swift */; };
+		BFFADBC227EF9C9D0093237D /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFADBC127EF9C9D0093237D /* PostViewController.swift */; };
+		BFFADBC427EF9DF00093237D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFADBC327EF9DF00093237D /* InfoViewController.swift */; };
+		BFFADBC727EFB3220093237D /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFADBC627EFB3220093237D /* ProfileHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,10 +25,15 @@
 		BFFADBA727EF8EE20093237D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFFADBA927EF8EE20093237D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BFFADBAB27EF8EE20093237D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		BFFADBAE27EF8EE20093237D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BFFADBB027EF8EE40093237D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFFADBB327EF8EE40093237D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BFFADBB527EF8EE40093237D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BFFADBBB27EF9B780093237D /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		BFFADBBD27EF9B860093237D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		BFFADBBF27EF9C2B0093237D /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		BFFADBC127EF9C9D0093237D /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		BFFADBC327EF9DF00093237D /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		BFFADBC627EFB3220093237D /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +66,28 @@
 		BFFADBA627EF8EE20093237D /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				BFFADBC527EFB2660093237D /* Profile */,
 				BFFADBA727EF8EE20093237D /* AppDelegate.swift */,
 				BFFADBA927EF8EE20093237D /* SceneDelegate.swift */,
 				BFFADBAB27EF8EE20093237D /* ViewController.swift */,
-				BFFADBAD27EF8EE20093237D /* Main.storyboard */,
 				BFFADBB027EF8EE40093237D /* Assets.xcassets */,
 				BFFADBB227EF8EE40093237D /* LaunchScreen.storyboard */,
 				BFFADBB527EF8EE40093237D /* Info.plist */,
+				BFFADBBB27EF9B780093237D /* FeedViewController.swift */,
+				BFFADBBF27EF9C2B0093237D /* Post.swift */,
+				BFFADBC127EF9C9D0093237D /* PostViewController.swift */,
+				BFFADBC327EF9DF00093237D /* InfoViewController.swift */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		BFFADBC527EFB2660093237D /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				BFFADBBD27EF9B860093237D /* ProfileViewController.swift */,
+				BFFADBC627EFB3220093237D /* ProfileHeaderView.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +150,6 @@
 			files = (
 				BFFADBB427EF8EE40093237D /* LaunchScreen.storyboard in Resources */,
 				BFFADBB127EF8EE40093237D /* Assets.xcassets in Resources */,
-				BFFADBAF27EF8EE20093237D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +162,12 @@
 			files = (
 				BFFADBAC27EF8EE20093237D /* ViewController.swift in Sources */,
 				BFFADBA827EF8EE20093237D /* AppDelegate.swift in Sources */,
+				BFFADBC227EF9C9D0093237D /* PostViewController.swift in Sources */,
+				BFFADBBE27EF9B860093237D /* ProfileViewController.swift in Sources */,
+				BFFADBC727EFB3220093237D /* ProfileHeaderView.swift in Sources */,
+				BFFADBC027EF9C2B0093237D /* Post.swift in Sources */,
+				BFFADBBC27EF9B780093237D /* FeedViewController.swift in Sources */,
+				BFFADBC427EF9DF00093237D /* InfoViewController.swift in Sources */,
 				BFFADBAA27EF8EE20093237D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,14 +175,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		BFFADBAD27EF8EE20093237D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BFFADBAE27EF8EE20093237D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		BFFADBB227EF8EE40093237D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,7 +312,6 @@
 				INFOPLIST_FILE = Navigation/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -320,7 +339,6 @@
 				INFOPLIST_FILE = Navigation/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
