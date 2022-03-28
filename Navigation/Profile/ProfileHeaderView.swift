@@ -26,6 +26,27 @@ class ProfileHeaderView: UIView {
         setStatusField = UITextField()
         
         super.init(frame: CGRect())
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    @objc func pressButton() {
+        status.text = statusText
+        statusText = ""
+        setStatusField.text = ""
+        setStatusField.resignFirstResponder()
+    }
+    
+    @objc func statusTextChanged(_ textField: UITextField) {
+        if let text = textField.text {
+            statusText = text
+        }
+    }
+    
+    func setupView() {
         
         userName.translatesAutoresizingMaskIntoConstraints = false
         userName.text = "Albert Einstein"
@@ -74,56 +95,44 @@ class ProfileHeaderView: UIView {
         setStatusField.layer.cornerRadius = 12
         setStatusField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         self.addSubview(setStatusField)
-    }
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    //MARK: Constraints
-
-    override func layoutSubviews() {
         
-        super.layoutSubviews()
+        useConstraint()
+    }
+    
+    private func useConstraint() {
         
-        NSLayoutConstraint.activate([
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
+        guard let superView = superview else {return}
+        
+        self.leftAnchor.constraint(equalTo: superView.leftAnchor).isActive = true
+        self.rightAnchor.constraint(equalTo: superView.rightAnchor).isActive = true
+        self.topAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.topAnchor).isActive = true
+        self.heightAnchor.constraint(equalToConstant: 220).isActive = true
             
-            userPic.widthAnchor.constraint(equalToConstant: 100),
-            userPic.heightAnchor.constraint(equalTo: userPic.widthAnchor),
-            userPic.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
-            userPic.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+        userPic.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        userPic.heightAnchor.constraint(equalTo: userPic.widthAnchor).isActive = true
+        userPic.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
+        userPic.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true
             
-            userName.leftAnchor.constraint(equalTo: userPic.rightAnchor, constant: 20),
-            userName.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
+        userName.leftAnchor.constraint(equalTo: userPic.rightAnchor, constant: 20).isActive = true
+        userName.topAnchor.constraint(equalTo: self.topAnchor, constant: 27).isActive = true
+        userName.rightAnchor.constraint(greaterThanOrEqualTo: self.rightAnchor, constant: 20).isActive = true
             
-            statusButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
-            statusButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
-            statusButton.topAnchor.constraint(equalTo: userPic.bottomAnchor, constant: 42),
-            statusButton.heightAnchor.constraint(equalToConstant: 50),
+        statusButton.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16).isActive = true
+        statusButton.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16).isActive = true
+        statusButton.topAnchor.constraint(equalTo: userPic.bottomAnchor, constant: 42).isActive = true
+        statusButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
             
-            setStatusField.leftAnchor.constraint(equalTo: userPic.rightAnchor, constant: 20),
-            setStatusField.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -10),
-            setStatusField.rightAnchor.constraint(greaterThanOrEqualTo: self.rightAnchor, constant: -16),
-            setStatusField.heightAnchor.constraint(equalToConstant: 40),
+        setStatusField.leftAnchor.constraint(equalTo: userPic.rightAnchor, constant: 20).isActive = true
+        setStatusField.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -10).isActive = true
+        setStatusField.rightAnchor.constraint(greaterThanOrEqualTo: self.rightAnchor, constant: -16).isActive = true
+        setStatusField.heightAnchor.constraint(equalToConstant: 40).isActive = true
             
-            status.leftAnchor.constraint(equalTo: userPic.rightAnchor, constant: 20),
-            status.bottomAnchor.constraint(equalTo: setStatusField.topAnchor, constant: -6),
-            status.rightAnchor.constraint(greaterThanOrEqualTo: self.rightAnchor, constant: -16)
+        status.leftAnchor.constraint(equalTo: userPic.rightAnchor, constant: 20).isActive = true
+        status.bottomAnchor.constraint(equalTo: setStatusField.topAnchor, constant: -6).isActive = true
+        status.rightAnchor.constraint(greaterThanOrEqualTo: self.rightAnchor, constant: -16).isActive = true
 
-        ])
     }
-    //MARK: actions
-    
-    @objc func pressButton() {
-        status.text = statusText
-        statusText = ""
-        setStatusField.text = ""
-        setStatusField.resignFirstResponder()
-    }
-    
-    @objc func statusTextChanged(_ textField: UITextField) {
-        if let text = textField.text {
-            statusText = text
-        }
-    }
-    
+ 
 }
