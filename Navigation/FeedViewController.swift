@@ -9,12 +9,12 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    let post = Post(title: "Post")
-    
     lazy private var firstButton: UIButton = {
         var firstButton = UIButton()
-        firstButton.translatesAutoresizingMaskIntoConstraints = false
-        firstButton.backgroundColor = .systemPink
+        firstButton.toAutoLayout()
+        firstButton.backgroundColor = UIColor.rgb(2, 122, 255, 1)
+        firstButton.layer.shadowColor = UIColor.black.cgColor
+
         firstButton.layer.cornerRadius = 25
         firstButton.setTitle("One", for: .normal)
         firstButton.setTitleColor(.white, for: .highlighted)

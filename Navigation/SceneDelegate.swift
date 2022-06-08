@@ -64,7 +64,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+}
 
-
+extension UIColor {
+    class func rgb(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ alpha: CGFloat) -> UIColor {
+        let color = UIColor(red: r / 255, green: g / 255, blue: b / 255, alpha: alpha)
+        return color
+    }
 }
 

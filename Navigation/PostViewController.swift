@@ -8,14 +8,12 @@
 import UIKit
 
 class PostViewController: UIViewController {
-    
-    var postTitle: String?
 
+    var postTitle: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .systemMint
-        
+        view.backgroundColor = .brown
         self.title = postTitle
         
         let infoBarItem: UIBarButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(openInfo))
@@ -28,3 +26,5 @@ class PostViewController: UIViewController {
         navigationController?.present(infoVC, animated: true)
     }
 }
+    
+  
