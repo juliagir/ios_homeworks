@@ -9,197 +9,198 @@ import UIKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
     
-    var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.backgroundColor = .white
-        scrollView.isScrollEnabled = true
-        scrollView.toAutoLayout()
-        return scrollView
+    var isLogin: Bool = false
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.loginTF.delegate = self
+        self.passwordTF.delegate = self
+        navigationController?.navigationBar.isHidden = true
+        setupViews()
+        
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
+        self.view.addGestureRecognizer(tapGesture)
+    
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+
+   private lazy var loginScrollView: UIScrollView = {
+        let loginScrollView = UIScrollView()
+        loginScrollView.toAutoLayout()
+        return loginScrollView
     }()
     
-    var contentView: UIView = {
+    private lazy var contentView: UIView = {
         let contentView = UIView()
-        contentView.backgroundColor = .white
         contentView.toAutoLayout()
         return contentView
     }()
     
-    var logo: UIImageView = {
-        let logo = UIImageView(image: UIImage(named: "logo"))
-        logo.toAutoLayout()
-        return logo
+    private lazy var VKIcon: UIImageView = {
+        let VKIcon = UIImageView()
+        VKIcon.image = UIImage(named: "logo")
+        VKIcon.toAutoLayout()
+        return VKIcon
     }()
     
-    var userName: UITextField = {
-        let userName = UITextField()
-        userName.toAutoLayout()
-        userName.textColor = .black
-        userName.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        userName.tintColor = UIColor(named: "AccentColor")
-        userName.autocapitalizationType = .none
-        userName.layer.borderColor = UIColor.lightGray.cgColor
-        userName.layer.borderWidth = 0.25
-        userName.placeholder = "Email"
-        userName.keyboardType = .emailAddress
-        userName.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: userName.frame.height))
-        userName.leftViewMode = .always
-        userName.returnKeyType = .done
-        return userName
+    private lazy var loginFormStackView: UIStackView = {
+        let loginFormStackView = UIStackView()
+        loginFormStackView.toAutoLayout()
+        loginFormStackView.axis = .vertical
+        loginFormStackView.layer.borderColor = UIColor.lightGray.cgColor
+        loginFormStackView.layer.borderWidth = 0.5
+        loginFormStackView.layer.cornerRadius = 10
+        loginFormStackView.distribution = .fillProportionally
+        loginFormStackView.backgroundColor = .systemGray6
+        loginFormStackView.clipsToBounds = true
+        return loginFormStackView
     }()
     
-    var password: UITextField = {
-        let password = UITextField()
-        password.toAutoLayout()
-        password.textColor = .black
-        password.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        password.tintColor = UIColor(named: "AccentColor")
-        password.autocapitalizationType = .none
-        password.layer.borderColor = UIColor.lightGray.cgColor
-        password.layer.borderWidth = 0.25
-        password.isSecureTextEntry = true
-        password.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: password.frame.height))
-        password.leftViewMode = .always
-        password.placeholder = "Password"
-        password.returnKeyType = UIReturnKeyType.default
-        return password
+    private lazy var loginTF: UITextField = {
+        let loginTF = UITextField()
+        loginTF.toAutoLayout()
+        loginTF.leftViewMode = .always
+        loginTF.placeholder = "Email or phone"
+        loginTF.layer.borderColor = UIColor.lightGray.cgColor
+        loginTF.layer.borderWidth = 0.25
+        loginTF.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: loginTF.frame.height))
+        loginTF.keyboardType = .emailAddress
+        loginTF.textColor = .black
+        loginTF.font = UIFont.systemFont(ofSize: 16)
+        loginTF.autocapitalizationType = .none
+        loginTF.returnKeyType = .done
+        return loginTF
     }()
     
-    var logIn: UIButton = {
-        let logIn = UIButton()
-        logIn.toAutoLayout()
-        logIn.setTitle("Вход", for: .normal)
-        
+    private lazy var passwordTF: UITextField = {
+        let passwordTF = UITextField()
+        passwordTF.toAutoLayout()
+        passwordTF.leftViewMode = .always
+        passwordTF.placeholder = "Password"
+        passwordTF.layer.borderColor = UIColor.lightGray.cgColor
+        passwordTF.layer.borderWidth = 0.25
+        passwordTF.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: passwordTF.frame.height))
+        passwordTF.isSecureTextEntry = true
+        passwordTF.textColor = .black
+        passwordTF.font = UIFont.systemFont(ofSize: 16)
+        passwordTF.autocapitalizationType = .none
+        passwordTF.returnKeyType = .done
+        return passwordTF
+    }()
+    
+    private lazy var loginButton: UIButton = {
+        let loginButton = UIButton()
+        loginButton.toAutoLayout()
         if let image = UIImage(named: "blue_pixel") {
-            logIn.setBackgroundImage(image.imageWithAlpha(alpha: 1), for: .normal)
-            logIn.setBackgroundImage(image.imageWithAlpha(alpha: 0.8), for: .selected)
-            logIn.setBackgroundImage(image.imageWithAlpha(alpha: 0.8), for: .highlighted)
-            logIn.setBackgroundImage(image.imageWithAlpha(alpha: 0.8), for: .disabled)
+            loginButton.setBackgroundImage(image.image(alpha: 1), for: .normal)
+            loginButton.setBackgroundImage(image.image(alpha: 0.8), for: .selected)
+            loginButton.setBackgroundImage(image.image(alpha: 0.8), for: .highlighted)
+            loginButton.setBackgroundImage(image.image(alpha: 0.8), for: .disabled)
         }
         
-        logIn.imageView?.contentMode = .scaleAspectFill
-        logIn.titleLabel?.textColor = .white
-        logIn.layer.cornerRadius = 10
-        logIn.addTarget(self, action: #selector(login), for: .touchUpInside)
-        logIn.clipsToBounds = true
-        return logIn
+        loginButton.setTitle("Log In", for: .normal)
+        loginButton.setTitleColor(.white, for: .normal)
+        loginButton.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
+        loginButton.layer.cornerRadius = 10
+        loginButton.clipsToBounds = true
+        return loginButton
+        
     }()
     
-    var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.toAutoLayout()
-        stackView.axis = .vertical
-        stackView.layer.borderColor = UIColor.lightGray.cgColor
-        stackView.layer.borderWidth = 0.5
-        stackView.layer.cornerRadius = 10
-        stackView.distribution = .fillProportionally
-        stackView.backgroundColor = .systemGray6
-        stackView.clipsToBounds = true
-        return stackView
-    }()
+
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            
+            loginScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            loginScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            loginScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            loginScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: loginScrollView.topAnchor),
+            contentView.trailingAnchor.constraint(equalTo: loginScrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: loginScrollView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: loginScrollView.leadingAnchor),
+            contentView.centerXAnchor.constraint(equalTo: loginScrollView.centerXAnchor),
+            contentView.centerYAnchor.constraint(equalTo: loginScrollView.centerYAnchor),
+            
+            VKIcon.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
+            VKIcon.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            VKIcon.heightAnchor.constraint(equalToConstant: 100),
+            VKIcon.widthAnchor.constraint(equalToConstant: 100),
+            
+            loginFormStackView.topAnchor.constraint(equalTo: VKIcon.bottomAnchor, constant: 120),
+            loginFormStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Const.leadingMargin),
+            loginFormStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Const.trailingMargin),
+            loginFormStackView.heightAnchor.constraint(equalToConstant: 100),
+            
+            loginButton.topAnchor.constraint(equalTo: loginFormStackView.bottomAnchor, constant: Const.indent),
+            loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Const.leadingMargin),
+            loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Const.trailingMargin),
+            loginButton.heightAnchor.constraint(equalToConstant: 50),
+        ])
+    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+
+    private func setupViews() {
         view.backgroundColor = .white
-        scrollView.contentSize = CGSize(width: view.frame.width, height: max(view.frame.width, view.frame.height))
-        
-        contentView.addSubviews(logo, stackView, logIn)
-        stackView.addArrangedSubview(userName)
-        stackView.addArrangedSubview(password)
-        scrollView.addSubview(contentView)
-        view.addSubview(scrollView)
-        
-        useConstraint()
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
-        view.addGestureRecognizer(tapGesture)
+        view.addSubview(loginScrollView)
+        loginScrollView.addSubview(contentView)
+        contentView.addSubviews(VKIcon, loginFormStackView, loginButton)
+        loginFormStackView.addArrangedSubview(loginTF)
+        loginFormStackView.addArrangedSubview(passwordTF)
+        setupConstraints()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillShow),
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
+
+    @objc private func loginButtonPressed() {
+        isLogin = true
+        if let image = UIImage(named: "blue_pixel") {
+            loginButton.setBackgroundImage(image.image(alpha: 0.8), for: .normal)
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+                self.loginButton.setBackgroundImage(image.image(alpha: 1), for: .normal)
+            }
+        }
+
+        let profileVC = ProfileViewController()
+        navigationController?.pushViewController(profileVC, animated: false)
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillHide),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillShowNotification,
-                                                  object: nil)
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillHideNotification,
-                                                  object: nil)
-    }
-    
-    private func useConstraint() {
-        
-                [scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-                 scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-                 scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                 scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-                 
-                 contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-                 contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-                 contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-                 contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-                 contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-                 contentView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-                 
-                 logo.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
-                 logo.widthAnchor.constraint(equalToConstant: 100),
-                 logo.heightAnchor.constraint(equalToConstant: 100),
-                 logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                 
-                 stackView.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 120),
-                 stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Const.leadingMargin),
-                 stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Const.trailingMargin),
-                 stackView.heightAnchor.constraint(equalToConstant: 100),
-                 
-                 logIn.topAnchor.constraint(equalTo: password.bottomAnchor, constant: Const.indent),
-                 logIn.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Const.leadingMargin),
-                 logIn.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Const.trailingMargin),
-                 logIn.heightAnchor.constraint(equalToConstant: 50)].forEach({$0.isActive = true})
-    }
-    
-    @objc func login() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardRectangle = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            scrollView.contentInset.bottom = keyboardRectangle.height
-            scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardRectangle.height, right: 0)
+        if isLogin {
+            navigationController?.setViewControllers([profileVC], animated: true)
         }
     }
     
-    @objc func keyboardWillHide(notification: NSNotification) {
-        scrollView.contentInset.bottom = .zero
-        scrollView.verticalScrollIndicatorInsets = .zero
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        loginTF.resignFirstResponder()
+        passwordTF.resignFirstResponder()
+        return true;
     }
     
     @objc func tap() {
-        password.resignFirstResponder()
-        userName.resignFirstResponder()
+        passwordTF.resignFirstResponder()
+        loginTF.resignFirstResponder()
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        password.resignFirstResponder()
-        userName.resignFirstResponder()
-        return true
+    @objc func keyboardShow(_ notification: Notification){
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            loginScrollView.contentOffset.y = keyboardRectangle.height - (loginScrollView.frame.height - loginButton.frame.minY) + Const.indent
+        }
     }
-}
-
-extension UIImage {
-    func imageWithAlpha(alpha: CGFloat) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        draw(at: .zero, blendMode: .normal, alpha: alpha)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage
-    }
+    
+    @objc func keyboardHide(_ notification: Notification){
+            loginScrollView.contentOffset = CGPoint(x: 0, y: 0)
+        }
 }

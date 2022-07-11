@@ -7,35 +7,43 @@
 
 import UIKit
 
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-
+        
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
         
-        let profileVC = ProfileViewController()
-        let feedVC = FeedViewController()
         
-        let profileNavigationVC = UINavigationController(rootViewController: profileVC)
+        let feedVC = FeedViewController()
+        let logInVC = LogInViewController()
+
+        let profileNavigationVC = UINavigationController(rootViewController: logInVC)
         let feedNavigationVC = UINavigationController(rootViewController: feedVC)
         
-        profileNavigationVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 0)
-        feedNavigationVC.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "note.text"), tag: 1)
         
+        logInVC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 0)
+        feedNavigationVC.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "note.text"), tag: 0)
+        
+
         let tabBar = UITabBarController()
         
         tabBar.viewControllers = [profileNavigationVC, feedNavigationVC]
         
+        
         window.rootViewController = tabBar
+        
+        createPhotosArray()
         
         window.makeKeyAndVisible()
         self.window = window
+        
     }
+
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

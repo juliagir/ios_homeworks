@@ -18,7 +18,7 @@ class FeedViewController: UIViewController {
         firstButton.layer.cornerRadius = 25
         firstButton.setTitle("One", for: .normal)
         firstButton.setTitleColor(.white, for: .highlighted)
-        firstButton.addTarget(self, action: #selector(openPost), for: .touchUpInside)
+        firstButton.addTarget(self, action: #selector(openPostVC), for: .touchUpInside)
         return firstButton
     }()
         
@@ -30,7 +30,7 @@ class FeedViewController: UIViewController {
         secondButton.layer.cornerRadius = 25
         secondButton.setTitle("Two", for: .normal)
         secondButton.setTitleColor(.white, for: .highlighted)
-        secondButton.addTarget(self, action: #selector(openPost), for: .touchUpInside)
+        secondButton.addTarget(self, action: #selector(openPostVC), for: .touchUpInside)
         return secondButton
     }()
     
@@ -52,10 +52,10 @@ class FeedViewController: UIViewController {
         stackView.spacing = 10
         stackView.distribution = .fillEqually
         view.backgroundColor = .systemGray3
-        setupConstraints()
+        useConstraint()
     }
     
-    private func setupConstraints() {
+    private func useConstraint() {
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
@@ -65,7 +65,7 @@ class FeedViewController: UIViewController {
     }
 
     
-        @objc func openPost() {
+        @objc func openPostVC() {
             let postVC = PostViewController()
             navigationController?.pushViewController(postVC, animated: true)
         }

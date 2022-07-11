@@ -11,6 +11,7 @@ class PostTableViewCell: UITableViewCell {
     
     static let identifire = "PostTableViewCell"
     
+    
     var authorView: UILabel = {
         let authorView = UILabel()
         authorView.toAutoLayout()
@@ -30,7 +31,7 @@ class PostTableViewCell: UITableViewCell {
         return descriptionView
     }()
     
-    var image: UIImageView = {
+    var postImage: UIImageView = {
        let image = UIImageView()
         image.toAutoLayout()
         image.contentMode = .scaleAspectFit
@@ -57,49 +58,50 @@ class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.addSubviews(authorView, descriptionView, image, likesView, viewsView)
+        contentView.addSubviews(authorView, descriptionView, postImage, likesView, viewsView)
         useConstraint()
     }
     
-    func useConstraint() {
-        [authorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Const.leadingMargin),
-         authorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Const.trailingMargin),
-         authorView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Const.indent),
-         authorView.heightAnchor.constraint(equalToConstant: 20),
-         image.topAnchor.constraint(equalTo: authorView.bottomAnchor, constant: Const.indent),
-         image.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-         image.heightAnchor.constraint(equalTo: contentView.widthAnchor),
-         descriptionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Const.leadingMargin),
-         descriptionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Const.trailingMargin),
-         descriptionView.topAnchor.constraint(equalTo: image.bottomAnchor, constant: Const.indent),
-         descriptionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -48),
-         likesView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Const.leadingMargin),
-         likesView.topAnchor.constraint(equalTo: descriptionView.bottomAnchor, constant: Const.indent),
-         likesView.heightAnchor.constraint(equalToConstant: Const.indent),
-         viewsView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Const.trailingMargin),
-         viewsView.topAnchor.constraint(equalTo: descriptionView.bottomAnchor, constant: Const.indent),
-         viewsView.heightAnchor.constraint(equalToConstant: Const.indent),].forEach { $0.isActive = true }
+    public func configureCell(author: String, description: String, image: String, likes: Int, views: Int) {
+        self.authorView.text = author
+        self.descriptionView.text = description
+        self.postImage.image = UIImage(named: image)
+        self.likesView.text = "Likes: \(likes)"
+        self.viewsView.text = "Views: \(views)"
     }
-    
-    public func specifyFields(post: Post) {
-        authorView.text = post.author
-        descriptionView.text = post.description
-        image.image = UIImage(named: post.image)
-        likesView.text = "Like: \(post.likes)"
-        viewsView.text = "Views: \(post.views)"
+ 
+    func useConstraint(){
+        NSLayoutConstraint.activate([
+            
+            contentView.widthAnchor.constraint(equalTo: self.widthAnchor),
+            
+            authorView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Const.indent),
+            authorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Const.leadingMargin),
+            authorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Const.trailingMargin),
+            
+            descriptionView.topAnchor.constraint(equalTo: postImage.bottomAnchor, constant: Const.indent),
+            descriptionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Const.leadingMargin),
+            descriptionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Const.trailingMargin),
+            
+            postImage.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            postImage.heightAnchor.constraint(equalTo: postImage.widthAnchor),
+            postImage.topAnchor.constraint(equalTo: authorView.bottomAnchor, constant: Const.indent),
+            
+            likesView.topAnchor.constraint(equalTo: descriptionView.bottomAnchor, constant: Const.indent),
+            likesView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Const.leadingMargin),
+            likesView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Const.trailingMargin),
+            
+            viewsView.topAnchor.constraint(equalTo: descriptionView.bottomAnchor, constant: Const.indent),
+            viewsView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Const.trailingMargin),
+            viewsView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Const.indent),
+        ])
     }
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implimented")
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
     
     override func prepareForReuse() {
         super.prepareForReuse()

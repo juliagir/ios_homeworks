@@ -23,19 +23,15 @@ struct Post {
     var views: Int
 }
 
-public extension UIView {
-    
-    func toAutoLayout() {
-        translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    func addSubviews(_ subviews: UIView...) {
-        subviews.forEach {addSubview($0)}
-    }
-}
 
-let constPostArray = [Post(author: "Albert Einstein", description: "Profession", image: "activity", likes: 7, views: 9),
-                      Post(author: "Albert Einstein", description: "Marittal status", image: "wife", likes: 7, views: 12),
-                      Post(author: "Albert Einstein", description: "My hobby", image: "relaxation", likes: 11, views: 24),
-                      Post(author: "Albert Einstein", description: "Also I prefair:", image: "music", likes: 0, views: 30)]
+
+var post1 = Post(author: "Albert Einstein", description: "Profession", image: "activity", likes: 7, views: 9)
+
+var post2 = Post(author: "Albert Einstein", description: "Marittal status", image: "wife", likes: 7, views: 12)
+
+var post3 = Post(author: "Albert Einstein", description: "My hobby", image: "relaxation", likes: 11, views: 24)
+
+var post4 = Post(author: "Albert Einstein", description: "Also I prefair:", image: "music", likes: 0, views: 30)
+
+var postArray = [post1, post2, post3, post4]
 
